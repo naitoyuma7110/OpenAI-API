@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int         @id @default(autoincrement())
+  firstName  String
+  lastName   String
+  birthDate  DateTime
+  address    String
+  tel        String
+  email      String
+  facility   Facility   @relation(fields: [facilityId], references: [id])
+  facilityId Int
+}
+
+model Facility {
+  id        Int       @id @default(autoincrement())
+  name      String
+  user      User[]     
+  hospital  Hospital[]
+  carehome  Carehome[]
+}
+
+model Hospital {
+  id        Int       @id @default(autoincrement())
+  name      String
+  facility  Facility?  @relation(fields: [facilityId], references: [id])
+  facilityId Int
+  company Company?     @relation(fields: [companyId], references: [id])
+  companyId Int
+}
+
+model Carehome {
+  id        Int       @id @default(autoincrement())
+  name      String    
+  facility  Facility?  @relation(fields: [facilityId], references: [id])
+  facilityId Int
+  company Company?     @relation(fields: [companyId], references: [id])
+  companyId Int
+}
+
+model Company {
+  id        Int       @id @default(autoincrement())
+  name      String
+  postCode  String
+  address   String
+  hospital  Hospital[]
+  carehome Carehome[]
+}
+
+model Question {
+  id      Int     @id @default(autoincrement())
+  content String
+  answer  Answer? @relation(fields: [id], references: [id])
+}
+
+model Answer {
+  id          Int       @id @default(autoincrement())
+  content     String
+  isLiked     Boolean?
+  question    Question?
+}
