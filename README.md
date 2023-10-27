@@ -10,6 +10,6 @@
 ## 使用技術
 
 - Javascript(Typescript)
-- Nest.js
+- Node.js(Nest)
 - Prisma
 - Docker(DB:PostgreSQL)
