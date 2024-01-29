@@ -1,4 +1,4 @@
-# NestjsでOpenAI(chatGPT3)と通信する API
+# NestでOpenAI(chatGPT3)と通信する API
 
 ## 概要
 - OpenAI が公開している API に質問リクエストを送りレスポンスで回答を得る
